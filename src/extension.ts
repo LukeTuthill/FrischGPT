@@ -1,6 +1,5 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-import { waitForDebugger } from 'inspector';
 import * as vscode from 'vscode';
 
 // This method is called when your extension is activated
@@ -24,11 +23,10 @@ export function activate(context: vscode.ExtensionContext) {
 		let question = vscode.window.showInputBox();
 		question.then((q) => {
 			if (q !== undefined) {
-			vscode.window.showInformationMessage(q.toString());
+			vscode.window.showInformationMessage(q);
 			}
 		});
 	});
-
 
 	context.subscriptions.push(command1);
 }
