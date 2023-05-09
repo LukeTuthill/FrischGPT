@@ -28,6 +28,10 @@ export function activate(context: vscode.ExtensionContext) {
 		});
 	});
 
+	let command3 = vscode.commands.registerCommand('frischgpt.highlight', () => {
+		
+	});
+
 	context.subscriptions.push(command1);
 }
 

@@ -20,6 +20,10 @@
       {
         "command": "frischgpt.inputText",
         "title": "Text Input"
+      },
+      {
+        "command": "frischgpt.highlight",
+        "title": "Text Highlight"
       }
     ]
   },
