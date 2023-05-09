@@ -1,5 +1,6 @@
 import * as vscode from 'vscode';
 
+//Has an optional position parameter, defaults to current cursor position
 export function enterText(text: string, position?:vscode.Position) {
     const editor = vscode.window.activeTextEditor;
     if (editor) {
