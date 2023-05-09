@@ -16,6 +16,10 @@
       {
         "command": "frischgpt.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "frischgpt.inputText",
+        "title": "Text Input"
       }
     ]
   },

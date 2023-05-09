@@ -1,5 +1,6 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
+import { waitForDebugger } from 'inspector';
 import * as vscode from 'vscode';
 
 // This method is called when your extension is activated
@@ -8,18 +9,28 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Use the console to output diagnostic information (console.log) and errors (console.error)
 	// This line of code will only be executed once when your extension is activated
-	console.log('WARNING FRISCH GPT HAS BEEN ACTIVATED');
+	console.log('WARNING: FRISCH GPT HAS BEEN ACTIVATED');
 
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('frischgpt.helloWorld', () => {
+	let command1 = vscode.commands.registerCommand('frischgpt.helloWorld', () => {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
 		vscode.window.showInformationMessage('Any comments, questions, concerns, or cries of outrage?');
 	});
 
-	context.subscriptions.push(disposable);
+	let command2 = vscode.commands.registerCommand('frischgpt.inputText', () => {
+		let question = vscode.window.showInputBox();
+		question.then((q) => {
+			if (q !== undefined) {
+			vscode.window.showInformationMessage(q.toString());
+			}
+		});
+	});
+
+
+	context.subscriptions.push(command1);
 }
 
 // This method is called when your extension is deactivated
