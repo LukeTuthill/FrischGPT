@@ -1,19 +1,22 @@
 import * as vscode from 'vscode';
 import * as functions from './basicFunctions';
 
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
 	console.log('WARNING: FRISCH GPT HAS BEEN ACTIVATED');
+	const apikey = await vscode.window.showInputBox({prompt: "ChatGPT Api key:"});
+	if (apikey !== undefined) {
+		functions.setGPT(apikey);
+	}
 
 	let command1 = vscode.commands.registerCommand('frischgpt.helloWorld', () => {
-		//vscode.window.showInformationMessage('Any comments, questions, concerns, or cries of outrage?');
-		vscode.window.showInformationMessage(functions.getLanguage());
+		vscode.window.showInformationMessage('Any comments, questions, concerns, or cries of outrage?');
 	});
 
 	let command2 = vscode.commands.registerCommand('frischgpt.inputText', () => {
 		let question = vscode.window.showInputBox();
 		question.then((q) => {
 			if (q !== undefined) {
-				functions.enterText(q);
+				vscode.window.showInformationMessage(functions.askQuestion(q));
 			}
 		});
 	});

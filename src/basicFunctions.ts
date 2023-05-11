@@ -1,4 +1,15 @@
 import * as vscode from 'vscode';
+import {ChatGPT} from './ChatGPT';
+
+let chatgpt:ChatGPT;
+
+export function setGPT(apikey:string) {
+    chatgpt = new ChatGPT(apikey);
+}
+
+export function askQuestion(question:string) {
+    return chatgpt.askQuestion(question);
+}
 
 //Has an optional position parameter, defaults to current cursor position
 export function enterText(text: string, position?:vscode.Position) {
@@ -29,18 +40,16 @@ export function getHighlightedText() {
     return highlighted;
 }
 
-export function getLanguage() {
-    const editor = vscode.window.activeTextEditor;
-    let fileName:string = "";
-    if (editor !== undefined) {
-        fileName = editor.document.fileName;
-    }
-    let splitFile = fileName.split(".");
-    return splitFile[splitFile.length-1];
-}
+// export function getLanguage() {
+//     const editor = vscode.window.activeTextEditor;
+//     let fileName:string = "";
+//     if (editor !== undefined) {
+//         fileName = editor.document.fileName;
+//     }
+//     let splitFile = fileName.split(".");
+//     return splitFile[splitFile.length-1];
+// }
 
-function pairLanguage(file:string) {
-}
 
 // export function findPosition() {
 //     const editor = vscode.window.activeTextEditor;
