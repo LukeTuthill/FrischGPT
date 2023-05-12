@@ -24,6 +24,10 @@
       {
         "command": "frischgpt.highlight",
         "title": "Text Highlight"
+      },
+      {
+        "command": "frischgpt.inputAPIKey",
+        "title": "API Key Setup"
       }
     ]
   },
@@ -49,6 +53,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "chatgpt": "^5.2.4"
+    "chatgpt": "^5.2.4",
+    "openai": "^3.2.1"
   }
 }
