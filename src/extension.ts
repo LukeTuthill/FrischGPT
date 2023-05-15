@@ -1,7 +1,7 @@
 import * as vscode from 'vscode';
 import * as functions from './basicFunctions';
 
-export async function activate(context: vscode.ExtensionContext) {
+export function activate(context: vscode.ExtensionContext) {
 	console.log('WARNING: FRISCH GPT HAS BEEN ACTIVATED');
 
 	let initalCommand = vscode.commands.registerCommand('frischgpt.inputAPIKey', () => {
@@ -17,17 +17,61 @@ export async function activate(context: vscode.ExtensionContext) {
 		vscode.window.showInformationMessage('Any comments, questions, concerns, or cries of outrage?');
 	});
 
-	let command2 = vscode.commands.registerCommand('frischgpt.inputText', () => {
+	let command2 = vscode.commands.registerCommand('frischgpt.askQuestion', () => {
 		let question = vscode.window.showInputBox();
 		question.then((q) => {
 			if (q !== undefined) {
-				vscode.window.showInformationMessage(functions.askQuestion(q));
+				let response = functions.askQuestion(q);
+				response.then((r) => {
+					if (r.data.choices[0].text !== undefined) {
+						vscode.window.showInformationMessage(r.data.choices[0].text);
+					}
+				});
 			}
 		});
 	});
 
-	let command3 = vscode.commands.registerCommand('frischgpt.highlight', () => {
-		vscode.window.showInformationMessage(functions.getHighlightedText());
+	let command3 = vscode.commands.registerCommand('frischgpt.fixCode', () => {
+		let response = functions.editText(functions.getHighlightedText());
+		response.then((r) => {
+			if (r.data.choices[0].text !== undefined) {
+				functions.replaceText(r.data.choices[0].text);
+			}
+		});
+	});
+
+	let command4 = vscode.commands.registerCommand('frischgpt.fixCodeWithPrompt', () => {
+		let prompt = vscode.window.showInputBox({prompt:"Prompt:"});
+			prompt.then((p) => {
+				let response = functions.editText(functions.getHighlightedText(), p);
+				response.then((r) => {
+				if (r.data.choices[0].text !== undefined) {
+					functions.replaceText(r.data.choices[0].text);
+				}
+			});
+		});
+	});
+
+	let command5 = vscode.commands.registerCommand('frischgpt.explainCode', () => {
+		let choice = vscode.window.showQuickPick(["Explanation as comments in code", "Explanation separate"]);
+		choice.then((c)=> {
+			if (c === "Explanation as comments in code") {
+				let response = functions.explainCode(functions.getHighlightedText(), true);
+				response.then((r) => {
+					if (r.data.choices[0].text !== undefined) {
+						functions.replaceText(r.data.choices[0].text);
+					}
+				});
+			}
+			else if (c === "Explanation separate") {
+				let response = functions.explainCode(functions.getHighlightedText(), false);
+				response.then((r) => {
+					if (r.data.choices[0].text !== undefined) {
+						vscode.window.showInformationMessage(r.data.choices[0].text);
+					}
+				});
+			}
+		});
 	});
 
 	context.subscriptions.push(command1);

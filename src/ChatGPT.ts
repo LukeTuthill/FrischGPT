@@ -5,29 +5,27 @@ export class ChatGPT {
     api:OpenAIApi;
     constructor(apikey:string) {
         const configuration = new Configuration({
-            apiKey: process.env.OPENAI_API_KEY,
+            apiKey: apikey,
           });
         this.api = new OpenAIApi(configuration);
     }
 
-    fixCode(code:string) {
-        const response = this.api.createEdit({
+    fixCode(code:string, prompt?:string) {
+        let instruction = "fix code";
+        if (prompt !== undefined) {
+            instruction = prompt;
+        }
+        return this.api.createEdit({
             model: "text-davinci-edit-001",
             input: code,
-            instruction: "Fix code",
+            instruction: instruction,
             temperature: 0,
             top_p: 1,
-          });
-        response.then((r) => {
-			if (r !== undefined) {
-				return r;
-			}
-		});
-        return "";
+        });
     }
 
     askQuestion(prompt:string) {
-        const response = this.api.createCompletion({
+        return this.api.createCompletion({
             model: "text-davinci-003",
             prompt: prompt,
             temperature: 0,
@@ -35,13 +33,30 @@ export class ChatGPT {
             top_p: 1,
             frequency_penalty: 0,
             presence_penalty: 0,
-          });
-        response.then((r) => {
-			if (r !== undefined) {
-				return r;
-			}
-		});
-        return "";
+        });
+    }
+
+    explainCode(code:string, isComment:boolean) {
+        if (isComment) {
+            return this.api.createEdit({
+                model: "text-davinci-edit-001",
+                input: code,
+                instruction: "Add a comment to the beginning of the code explaining what it does: "+code,
+                temperature: 0,
+                top_p: 1,
+            });
+        }
+        else {
+            return this.api.createCompletion({
+                model: "text-davinci-003",
+                prompt: "Explain this code: "+code,
+                temperature: 0,
+                max_tokens: 300,
+                top_p: 1,
+                frequency_penalty: 0,
+                presence_penalty: 0,
+            });
+        }
     }
 }
 

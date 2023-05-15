@@ -18,12 +18,20 @@
         "title": "Hello World"
       },
       {
-        "command": "frischgpt.inputText",
-        "title": "Text Input"
+        "command": "frischgpt.askQuestion",
+        "title": "Ask Question"
       },
       {
-        "command": "frischgpt.highlight",
-        "title": "Text Highlight"
+        "command": "frischgpt.fixCode",
+        "title": "Fix Code"
+      },
+      {
+        "command": "frischgpt.fixCodeWithPrompt",
+        "title": "Fix Code with Prompt"
+      },
+      {
+        "command": "frischgpt.explainCode",
+        "title": "Explain Code"
       },
       {
         "command": "frischgpt.inputAPIKey",

@@ -11,6 +11,20 @@ export function askQuestion(question:string) {
     return chatgpt.askQuestion(question);
 }
 
+export function editText(text:string, prompt?:string) {
+    if (prompt !== undefined) {
+        return chatgpt.fixCode(text, prompt);
+    }
+    return chatgpt.fixCode(text);
+}
+
+export function explainCode(text:string, isComment:boolean) {
+    if (isComment) {
+    return chatgpt.explainCode(text, true);
+    }
+    return chatgpt.explainCode(text, false);
+}
+
 //Has an optional position parameter, defaults to current cursor position
 export function enterText(text: string, position?:vscode.Position) {
     const editor = vscode.window.activeTextEditor;
@@ -22,6 +36,21 @@ export function enterText(text: string, position?:vscode.Position) {
             else {
                 editBuilder.insert(position, text);
             }
+        });
+    }
+}
+
+export function replaceText(text:string) {
+    const editor = vscode.window.activeTextEditor;
+    if (editor) {
+        editor.edit(editBuilder => {
+            const selection = editor.selection;
+            if (selection && !selection.isEmpty) {
+                const range = new vscode.Range(selection.start.line, selection.start.character, 
+                    selection.end.line, selection.end.character);
+                editBuilder.delete(range);
+            }
+            editBuilder.insert(editor.selection.active, text);
         });
     }
 }
