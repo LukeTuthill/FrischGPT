@@ -69,15 +69,32 @@ export function getHighlightedText() {
     return highlighted;
 }
 
-// export function getLanguage() {
-//     const editor = vscode.window.activeTextEditor;
-//     let fileName:string = "";
-//     if (editor !== undefined) {
-//         fileName = editor.document.fileName;
-//     }
-//     let splitFile = fileName.split(".");
-//     return splitFile[splitFile.length-1];
-// }
+export function getText() {
+    const editor = vscode.window.activeTextEditor;
+    let text:string = "";
+    if (editor !== undefined) {
+        text = editor.document.getText();
+    }
+    return text;
+}
+
+export function createFile(fileName:string, text:string) {
+}
+
+export function getFileExtension() {
+    const editor = vscode.window.activeTextEditor;
+    let fileName:string = "";
+    if (editor !== undefined) {
+        fileName = editor.document.fileName;
+    }
+    let splitFile = fileName.split(".");
+    return splitFile[splitFile.length-1];
+}
+
+export function getLanguage() {
+    const extension:string = getFileExtension();
+    
+}
 
 
 // export function findPosition() {

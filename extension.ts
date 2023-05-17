@@ -74,6 +74,31 @@ export function activate(context: vscode.ExtensionContext) {
 		});
 	});
 
+	let command6 = vscode.commands.registerCommand('frischgpt.addCode', () => {
+		let prompt = vscode.window.showInputBox({prompt:"Prompt:"});
+			prompt.then((p) => {
+				let response = functions.askQuestion(prompt);
+				response.then((r) => {
+				if (r.data.choices[0].text !== undefined) {
+					functions.enterText(r.data.choices[0].text);
+				}
+			});
+		});
+	});
+
+	let command7 = vscode.commands.registerCommand('frischgpt.translateCode', () => {
+		let language = vscode.window.showInputBox({prompt:"Langauge to translate to:"});
+			language.then((p) => {
+				let response = functions.askQuestion("Translate this code to "+language+" "+functions.getText());
+				let fileName = "test.txt";
+				response.then((r) => {
+				if (r.data.choices[0].text !== undefined) {
+					functions.createFile(fileName, r.data.choices[0].text);
+				}
+			});
+		});
+	});
+
 	context.subscriptions.push(command1);
 }
 
