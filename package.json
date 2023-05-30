@@ -12,6 +12,31 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ChatGPTContainer",
+          "title": "ChatGPT Message Board",
+          "icon": "chatgptlogo.png"
+        }
+      ]
+    },
+    "views": {
+      "ChatGPTContainer": [
+        {
+          "id": "chat",
+          "name": "ChatGPT Message Board"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "chat",
+        "contents": "In order to use ChatGPT, you must input your own unique API Key. API Keys can be obtained by going to [OpenAI](https://platform.openai.com/account/api-keys) and setting up a paid account.\n[Api Key](command:frischgpt.inputAPIKey)\nTo learn more about how to get an API key from Open AI [visit their blog](https://openai.com/blog/openai-api).",
+        "when": "basicFunctions.testGPT == false"
+      }
+    ],
+
     "commands": [
       {
         "command": "frischgpt.helloWorld",
@@ -44,6 +69,21 @@
       {
         "command": "cowsay.backwards",
         "title": "Backwards"
+      }
+    ],
+
+    "keybindings": [
+      {
+        "command": "frischgpt.askQuestion",
+        "key": "ctrl+f1",
+        "mac": "cmd+f1",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "frischgpt.fixCodeWithPrompt",
+        "key": "ctrl+f2",
+        "mac": "cmd+f2",
+        "when": "editorTextFocus"
       }
     ]
   },
