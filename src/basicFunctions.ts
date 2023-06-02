@@ -102,8 +102,6 @@ export function getFileExtension() {
 }
 
 export function getLanguage() {
-    const extension:string = getFileExtension();
-    
 }
 
 
