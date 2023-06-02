@@ -32,8 +32,7 @@
     "viewsWelcome": [
       {
         "view": "chat",
-        "contents": "In order to use ChatGPT, you must input your own unique API Key. API Keys can be obtained by going to [OpenAI](https://platform.openai.com/account/api-keys) and setting up a paid account.\n[Api Key](command:frischgpt.inputAPIKey)\nTo learn more about how to get an API key from Open AI [visit their blog](https://openai.com/blog/openai-api).",
-        "when": "basicFunctions.testGPT == false"
+        "contents": "In order to use ChatGPT, you must input your own unique API Key. API Keys can be obtained by going to [OpenAI](https://platform.openai.com/account/api-keys) and setting up a paid account.\n[Api Key](command:frischgpt.inputAPIKey)\nTo learn more about how to get an API key from Open AI [visit their blog](https://openai.com/blog/openai-api)."
       }
     ],
 

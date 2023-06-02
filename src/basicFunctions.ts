@@ -8,7 +8,12 @@ export function setGPT(apikey:string) {
 }
 
 export function testGPT() {
-    return chatgpt.askQuestion("Say test if this is working") !== undefined;
+    let test = chatgpt.askQuestion("Say test if this is working");
+    test.then((t)=>  {
+        if (t !== undefined) {
+            //isApiSetup = true;
+        }
+    });
 }
 
 export function askQuestion(question:string) {
