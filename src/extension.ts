@@ -18,7 +18,6 @@ export async function activate(context: vscode.ExtensionContext) {
 		vscode.window.showInformationMessage('Any comments, questions, concerns, or cries of outrage?');
 		// let array:json.ProgrammingLanguagesExtensions[] = json.Convert.toProgrammingLanguagesExtensions();
 		// vscode.window.showInformationMessage(array[0].name);
-		vscode.window.showInformationMessage(vscode.window.);
 	});
 
 	let command2 = vscode.commands.registerCommand('frischgpt.askQuestion', () => {
@@ -93,7 +92,7 @@ export async function activate(context: vscode.ExtensionContext) {
 		});
 
 	let command7 = vscode.commands.registerCommand('frischgpt.translateCode', () => {
-		let language = vscode.window.showInputBox({prompt:"Langauge to translate to:"});
+		let language = vscode.window.showInputBox({prompt:"Language to translate to:"});
 			language.then((p) => {
 				let response = functions.askQuestion("Translate this code to "+language+" "+functions.getText());
 				let fileName = "test.txt";

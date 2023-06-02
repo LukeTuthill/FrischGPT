@@ -7,6 +7,10 @@ export function setGPT(apikey:string) {
     chatgpt = new ChatGPT(apikey);
 }
 
+export function testGPT() {
+    return chatgpt.askQuestion("Say test if this is working") !== undefined;
+}
+
 export function askQuestion(question:string) {
     return chatgpt.askQuestion(question);
 }
