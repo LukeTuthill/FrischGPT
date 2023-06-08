@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import * as functions from './basicFunctions';
-import * as json from './JSONParser';
 
 export async function activate(context: vscode.ExtensionContext) {
 	console.log('WARNING: FRISCH GPT HAS BEEN ACTIVATED');
@@ -94,11 +93,10 @@ export async function activate(context: vscode.ExtensionContext) {
 	let command7 = vscode.commands.registerCommand('frischgpt.translateCode', () => {
 		let language = vscode.window.showInputBox({prompt:"Language to translate to:"});
 			language.then((p) => {
-				let response = functions.askQuestion("Translate this code to "+language+" "+functions.getText());
-				let fileName = "test.txt";
+				let response = functions.askQuestion("Translate this code to "+language+": "+functions.getText());
 				response.then((r) => {
 				if (r.data.choices[0].text !== undefined) {
-					functions.createFile(fileName, r.data.choices[0].text);
+					functions.replaceText(r.data.choices[0].text);
 				}
 			});
 		});

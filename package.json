@@ -62,12 +62,8 @@
         "title": "API Key Setup"
       },
       {
-        "command": "cowsay.say",
-        "title": "Cow say"
-      },
-      {
-        "command": "cowsay.backwards",
-        "title": "Backwards"
+        "command": "frischgpt.translateCode",
+        "title": "Translate Code"
       }
     ],
 
